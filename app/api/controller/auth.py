@@ -12,7 +12,7 @@ class AuthController:
     def __init__(
             self,
             auth_repo: AuthRepository = Depends(),
-            token_serializer: TokenSerializer = Depends()
+            # token_serializer: TokenSerializer = Depends()
     ):
         self.auth_repo = auth_repo
 
