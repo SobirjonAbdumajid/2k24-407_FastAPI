@@ -14,3 +14,7 @@ class UserInSchema(BaseModel):
     is_staff: bool = False
     is_active: bool = True
     is_superuser: bool = False
+
+
+class User(UserInSchema):
+    id: int

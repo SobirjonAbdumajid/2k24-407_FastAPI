@@ -1,11 +1,14 @@
 from fastapi import APIRouter, Depends
 
 from app.api.controller.rooms import RoomsController
+from app.api.dependecies.get_current_user import get_user
 
 router = APIRouter()
 
 
-@router.get("")
+@router.get(
+    ""
+)
 async def get_rooms(
         controller: RoomsController = Depends()
 ):
