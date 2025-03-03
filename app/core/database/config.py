@@ -22,7 +22,7 @@ def get_general_session_maker(
         general_engine: AsyncEngine = Depends(get_async_engine)
 ) -> async_sessionmaker[AsyncSession]:
     return async_sessionmaker(
-        bind=general_engine, autocommit=False, autoflush=False
+        bind=general_engine, autocommit=False, autoflush=False, expire_on_commit=False
     )
 
 
