@@ -16,10 +16,10 @@ def create_app() -> CORSMiddleware:
         description=settings.PROJECT_DESCRIPTION,
         version=settings.PROJECT_VERSION,
     )
-    app_.include_router(auth_router, prefix="/auth", tags=["auth"])
-    app_.include_router(rooms_router, prefix="/rooms", tags=["rooms"])
-    app_.include_router(booking_router, prefix="/booking", tags=["booking"])
-    app_.include_router(rooms_type_router, prefix="/room_types", tags=["room_types"])
+    app_.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+    app_.include_router(rooms_router, prefix="/rooms", tags=["Rooms"])
+    app_.include_router(booking_router, prefix="/booking", tags=["Booking"])
+    app_.include_router(rooms_type_router, prefix="/room_types", tags=["Room Types"])
     return CORSMiddleware(
         app_,
         allow_origins=["*"],
