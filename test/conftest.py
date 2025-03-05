@@ -39,6 +39,7 @@ def set_up_db():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     yield
+    Base.metadata.drop_all(bind=engine)
     print('Setting up DB done')
 
 
@@ -123,15 +124,9 @@ def get_faker() -> Faker:
     return Faker()
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def http_client():
     print('HTTP client started successfully\n')
     app = create_app()
     with TestClient(app) as test_client:
         yield test_client
-
-
-def test_smth(http_client):
-    print('Testing smth function\n')
-    assert True
-    print('Testing smth done\n')
