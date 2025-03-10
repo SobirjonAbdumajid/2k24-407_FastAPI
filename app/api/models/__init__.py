@@ -3,10 +3,11 @@ __all__ = (
     "Users",
     "Rooms",
     "FeedBack",
-    "Payments"
-
+    "Payments",
+    "Base"
 )
 
+from app.core.models.base import Base
 from app.api.models.bookings import Bookings
 from app.api.models.users import Users
 from app.api.models.rooms import Rooms
