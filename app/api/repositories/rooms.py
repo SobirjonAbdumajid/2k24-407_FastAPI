@@ -1,4 +1,4 @@
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,7 +30,11 @@ class RoomsRepository:
         FROM rooms as m
         JOIN rooms_status as f ON m.status = f.id
         JOIN rooms_type as s ON m.room_type = s.id
-        where m.room_number = :room_id
-        """)
-        stmt = await self.session.execute(raw_sql, {"room_id": room_id})
-        return RoomsSchema.model_validate(stmt.mappings().first())
+        where m.id = :room_id
+        """).bindparams(room_id=room_id)
+
+        stmt = await self.session.execute(raw_sql)
+        res  = stmt.mappings().first()
+        if res is None:
+            raise HTTPException(status_code=404, detail="Room not found")
+        return RoomsSchema.model_validate(res)
