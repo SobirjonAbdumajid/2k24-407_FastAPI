@@ -7,11 +7,11 @@
 #         "path, expected_status",
 #         [
 #             ("/rooms/", status.HTTP_200_OK),
-#             ("/test", status.HTTP_404_NOT_FOUND),
+#             ("/test/", status.HTTP_404_NOT_FOUND),
 #             ("/room_types/1", status.HTTP_200_OK),
-#             ("/rooms/132", status.HTTP_404_NOT_FOUND),
-#             ("/rooms/21246513af", status.HTTP_422_UNPROCESSABLE_ENTITY),
-#             ("/room_types/13113", status.HTTP_404_NOT_FOUND),
+#             ("/rooms/999/", status.HTTP_404_NOT_FOUND),
+#             ("/rooms/1i/", status.HTTP_422_UNPROCESSABLE_ENTITY),
+#             ("/room_types/999/", status.HTTP_404_NOT_FOUND),
 #         ]
 #     )
 #     def test_rooms(self, http_client, path, expected_status):
