@@ -1,8 +1,8 @@
-"""change rooms_type and rooms_status #1
+"""d
 
-Revision ID: 2931f15e7b5f
+Revision ID: 741c5a053285
 Revises: 
-Create Date: 2024-12-18 10:14:06.780593
+Create Date: 2025-03-10 18:19:35.325379
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '2931f15e7b5f'
+revision: str = '741c5a053285'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
