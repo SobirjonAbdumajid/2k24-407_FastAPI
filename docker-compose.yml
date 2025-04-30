@@ -1,0 +1,37 @@
+services:
+
+  app-back:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+    depends_on:
+      - db-postgres
+      - db-redis
+    command: [
+      "bash", "-c", "
+        sleep 10 && \
+        alembic upgrade head && \
+        bash start_api.sh"
+    ]
+
+  db-postgres:
+    image: postgres:17-alpine
+    ports:
+      - '5432:5432'
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+
+  db-redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    restart: always
