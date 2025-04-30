@@ -8,7 +8,6 @@ router = APIRouter()
 
 @router.post(
     '/',
-    dependencies=[Depends(get_user)],
     status_code=status.HTTP_201_CREATED)
 async def make_booking(
         booking: BookingSchema,
