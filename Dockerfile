@@ -12,5 +12,3 @@ COPY . .
 EXPOSE 8000
 
 RUN chmod +x start_api.sh
-
-CMD ["./start_api.sh"]
