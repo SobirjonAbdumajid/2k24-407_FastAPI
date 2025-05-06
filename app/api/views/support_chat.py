@@ -3,7 +3,8 @@ from starlette.websockets import WebSocket
 
 router = APIRouter()
 
-@router.websocket("/ws/")
+
+@router.websocket("/ws")
 async def support_chat_endpoint(websocket: WebSocket):
     await websocket.accept()
     async for message in websocket.iter_text():
