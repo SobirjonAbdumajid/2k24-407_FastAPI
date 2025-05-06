@@ -28,6 +28,8 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
 
 
   db-redis:
@@ -35,3 +37,5 @@ services:
     ports:
       - '6379:6379'
     restart: always
+    volumes:
+      - ./redis_data:/var/lib/redis/data
