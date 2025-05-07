@@ -30,3 +30,6 @@ archive.zip
 .DS_Store
 
 .env
+db_data
+redis_data
+rabbitmq_data
