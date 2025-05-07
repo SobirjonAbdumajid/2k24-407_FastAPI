@@ -39,3 +39,15 @@ services:
     restart: always
     volumes:
       - ./redis_data:/var/lib/redis/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq

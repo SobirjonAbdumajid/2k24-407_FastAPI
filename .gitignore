@@ -32,3 +32,4 @@ archive.zip
 .env
 db_data
 redis_data
+rabbitmq_data
