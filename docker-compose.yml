@@ -40,14 +40,53 @@ services:
     volumes:
       - ./redis_data:/var/lib/redis/data
 
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db-redis
+      - db-postgres
+      - app-back
+    env_file:
+      - .env
+    command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
+
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:4.0.2-management
     ports:
       - '15672:15672'
       - '5672:5672'
     restart: always
+    depends_on:
+      - app-back
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: password
     volumes:
       - ./rabbitmq_data:/var/lib/rabbitmq
+
+
+  rabbitmq-consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - app-back
+    command: ["python", "-m", "app.core.rq.consumer"]
+    env_file:
+      - .env
+
+  rabbitmq-publisher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - app-back
+      - rabbitmq-consumer
+    command: [ "python", "-m", "app.core.rq.publisher" ]
+    env_file:
+      - .env
