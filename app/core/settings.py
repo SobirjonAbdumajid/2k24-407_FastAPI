@@ -16,15 +16,22 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PORT: str
 
+    # REDIS CREDENTIALS
+    REDIS_HOST: str
+    REDIS_PORT: str
+
     JWT_ENCRYPT_ALGORITHM: str
     JWT_SECRET_KEY: str
     JWT_EXPIRE_SECONDS: int
-
     model_config = SettingsConfigDict(env_file=".env.test" if "PYTEST_CURRENT_TEST" in os.environ else ".env")
 
     @property
     def GET_POSTGRES_URL(self) -> str:
         return f'{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_NAME}'
+
+    @property
+    def GET_REDIS_URL(self) -> str:
+        return f'redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0'
 
 
 @cache
