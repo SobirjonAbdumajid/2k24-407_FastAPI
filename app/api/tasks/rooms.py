@@ -1,5 +1,3 @@
-import asyncio
-
 from celery import shared_task
 
 from app.api.repositories.rooms import RoomsRepository

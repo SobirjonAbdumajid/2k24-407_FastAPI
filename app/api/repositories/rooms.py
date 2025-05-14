@@ -7,7 +7,7 @@ from sqlalchemy import text, insert, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 
-from app.core.database.config import get_general_session, get_general_sync_session, get_sync_session_maker
+from app.core.database.config import get_general_session, get_sync_session_maker
 
 from app.api.schemas.rooms import RoomsSchema
 from app.api.models.rooms import Rooms
