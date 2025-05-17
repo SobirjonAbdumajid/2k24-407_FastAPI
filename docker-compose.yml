@@ -40,33 +40,6 @@ services:
         bash start_api.sh"
     ]
 
-<<<<<<< HEAD
-  db-postgres:
-    image: postgres:17-alpine
-    ports:
-      - '5432:5432'
-    restart: always
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-
-
-  db-redis:
-    image: redis:7-alpine
-    ports:
-      - '6379:6379'
-    restart: always
-    volumes:
-      - ./redis_data:/var/lib/redis/data
-<<<<<<< HEAD
-=======
-
-=======
->>>>>>> 8b88de8ae48916aa18dff02a52d027bd5db82c08
-
   celery_worker:
     build:
       context: .
@@ -75,31 +48,8 @@ services:
       - app-back
     env_file:
       - .env
-<<<<<<< HEAD
-    command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
 
->>>>>>> 5a4b339cf09f72926a3b636ac59be0ce332b59e3
-  rabbitmq:
-    image: rabbitmq:4.0.2-management
-    ports:
-<<<<<<< HEAD
-      - "5672:5672"
-      - "15672:15672"
-=======
-      - '15672:15672'
-      - '5672:5672'
-    restart: always
-    depends_on:
-      - app-back
->>>>>>> 5a4b339cf09f72926a3b636ac59be0ce332b59e3
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    restart: always
-    volumes:
-      - ./rabbitmq_data:/var/lib/rabbitmq
-<<<<<<< HEAD
-=======
+    command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
 
 
   rabbitmq-consumer:
@@ -124,7 +74,3 @@ services:
     command: [ "python", "-m", "app.core.rq.publisher" ]
     env_file:
       - .env
->>>>>>> 5a4b339cf09f72926a3b636ac59be0ce332b59e3
-=======
-    command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
->>>>>>> 8b88de8ae48916aa18dff02a52d027bd5db82c08
