@@ -1,10 +1,30 @@
 services:
 
+  db-postgres:
+    image: postgres:17-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+
+  db-redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    depends_on:
+      - db-postgres
+    volumes:
+      - ./redis_data:/var/lib/redis/data
+
   app-back:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
       - '8000:8000'
     env_file:
@@ -20,6 +40,7 @@ services:
         bash start_api.sh"
     ]
 
+<<<<<<< HEAD
   db-postgres:
     image: postgres:17-alpine
     ports:
@@ -43,17 +64,18 @@ services:
 <<<<<<< HEAD
 =======
 
+=======
+>>>>>>> 8b88de8ae48916aa18dff02a52d027bd5db82c08
 
   celery_worker:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db-redis
-      - db-postgres
       - app-back
     env_file:
       - .env
+<<<<<<< HEAD
     command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
 
 >>>>>>> 5a4b339cf09f72926a3b636ac59be0ce332b59e3
@@ -103,3 +125,6 @@ services:
     env_file:
       - .env
 >>>>>>> 5a4b339cf09f72926a3b636ac59be0ce332b59e3
+=======
+    command: ["celery", "-A", "app.core.celery", "worker", "-l", "INFO"]
+>>>>>>> 8b88de8ae48916aa18dff02a52d027bd5db82c08

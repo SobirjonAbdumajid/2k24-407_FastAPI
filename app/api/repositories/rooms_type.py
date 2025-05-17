@@ -52,3 +52,4 @@ class RoomTypeRepository:
         await self.__session.delete(room_type)
         await self.__session.commit()
         return None
+
